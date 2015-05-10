@@ -73,7 +73,8 @@ uint32_t width, height;
 void spiWrite(uint8_t c) 
 {
   SET_LOW(CSX);
-  SPI_WriteBlocking(SSI0_BASE, &c, 1);
+  SSIDataPut(SSI0_BASE, c);
+  while ( SSIBusy(SSI0_BASE) ) {}
   SET_HIGH(CSX);
 }
 
